@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button resBtn = (Button) view;
         resBtn.setVisibility(View.INVISIBLE);
-        // Do Something
+        
         ImageView img0 = findViewById(R.id.c0);
         ImageView img1 = findViewById(R.id.c1);
         ImageView img2 = findViewById(R.id.c2);
@@ -97,97 +97,126 @@ public class MainActivity extends AppCompatActivity {
 
     public void squareTap(View view) {
 
-        // Find the status bar
+        try {
 
-        TextView statusBar = findViewById(R.id.status);
+            // Find the status bar
 
-        ImageView img = (ImageView) view;
-        int tapped = Integer.parseInt(img.getTag().toString());
+            TextView statusBar = findViewById(R.id.status);
 
-        //img.setTranslationY(-1000f);
+            ImageView img = (ImageView) view;
+            int tapped = Integer.parseInt(img.getTag().toString());
 
-        flag = 0;
+            //img.setTranslationY(-1000f);
 
-        if (activePlayer == 1) {
+            flag = 0;
 
-            if (win == 2) {
-                if (gameState[tapped] == 2) {
-                    img.setImageResource(R.drawable.cheems);
-                    gameState[tapped] = activePlayer;
-                    flag = 1;
+            if (activePlayer == 1) {
+
+                if (win == 2) {
+                    if (gameState[tapped] == 2) {
+                        img.setImageResource(R.drawable.cheems);
+                        gameState[tapped] = activePlayer;
+                        flag = 1;
+                    }
+                }
+
+                winCheck();
+                if (win != 2) {
+                    switch (win) {
+                        case 0:
+                            statusBar.setText("Doge Wins");
+                            Button restartBtn = findViewById(R.id.restartButton);
+                            restartBtn.setVisibility(View.VISIBLE);
+                            break;
+                        case 1:
+                            statusBar.setText("Cheems Wins");
+                            Button rB1 = findViewById(R.id.restartButton);
+                            rB1.setVisibility(View.VISIBLE);
+                            break;
+                        case 3:
+                            statusBar.setText("Draw !");
+                            Button rB2 = findViewById(R.id.restartButton);
+                            rB2.setVisibility(View.VISIBLE);
+                            break;
+                    }
+                } else {
+                    if (flag != 1) {
+                        Toast.makeText(this, "Tap on a Valid Square", Toast.LENGTH_SHORT).show();
+                    } else {
+                        statusBar.setText("Doge' s Turn - Tap on the empty squares to play");
+                        activePlayer = 0;
+                    }
+                }
+            } else {
+
+                if (win == 2) {
+                    if (gameState[tapped] == 2) {
+                        img.setImageResource(R.drawable.swoledoge);
+                        gameState[tapped] = activePlayer;
+                        flag = 1;
+                    }
+                }
+
+                winCheck();
+                if (win != 2) {
+                    switch (win) {
+                        case 0:
+                            statusBar.setText("Doge Wins");
+                            Button restartBtn = findViewById(R.id.restartButton);
+                            restartBtn.setVisibility(View.VISIBLE);
+                            break;
+                        case 1:
+                            statusBar.setText("Cheems Wins");
+                            Button rB1 = findViewById(R.id.restartButton);
+                            rB1.setVisibility(View.VISIBLE);
+                            break;
+                        case 3:
+                            statusBar.setText("Draw !");
+                            Button rB2 = findViewById(R.id.restartButton);
+                            rB2.setVisibility(View.VISIBLE);
+                            break;
+                    }
+                } else {
+                    if (flag != 1) {
+                        Toast.makeText(this, "Tap on a Valid Square", Toast.LENGTH_SHORT).show();
+                    } else {
+                        statusBar.setText("Cheems' Turn - Tap on the empty squares to play");
+                        activePlayer = 1;
+                    }
                 }
             }
+        }catch (Exception exception){
+            ImageView img0 = findViewById(R.id.c0);
+            ImageView img1 = findViewById(R.id.c1);
+            ImageView img2 = findViewById(R.id.c2);
+            ImageView img3 = findViewById(R.id.c3);
+            ImageView img4 = findViewById(R.id.c4);
+            ImageView img5 = findViewById(R.id.c5);
+            ImageView img6 = findViewById(R.id.c6);
+            ImageView img7 = findViewById(R.id.c7);
+            ImageView img8 = findViewById(R.id.c8);
 
-            winCheck();
-            if (win != 2) {
-                switch (win) {
-                    case 0:
-                        statusBar.setText("Doge Wins");
-                        Button restartBtn = findViewById(R.id.restartButton);
-                        restartBtn.setVisibility(View.VISIBLE);
-                        break;
-                    case 1:
-                        statusBar.setText("Cheems Wins");
-                        Button rB1 = findViewById(R.id.restartButton);
-                        rB1.setVisibility(View.VISIBLE);
-                        break;
-                    case 3:
-                        statusBar.setText("Draw !");
-                        Button rB2 = findViewById(R.id.restartButton);
-                        rB2.setVisibility(View.VISIBLE);
-                        break;
-                }
+            img0.setImageResource(android.R.color.transparent);
+            img1.setImageResource(android.R.color.transparent);
+            img2.setImageResource(android.R.color.transparent);
+            img3.setImageResource(android.R.color.transparent);
+            img4.setImageResource(android.R.color.transparent);
+            img5.setImageResource(android.R.color.transparent);
+            img6.setImageResource(android.R.color.transparent);
+            img7.setImageResource(android.R.color.transparent);
+            img8.setImageResource(android.R.color.transparent);
+
+            for (int i=0; i<9; i++){
+                gameState[i] = 2;
             }
 
-            else {
-                if (flag != 1){
-                    Toast.makeText(this, "Tap on a Valid Square", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    statusBar.setText("Doge' s Turn - Tap on the empty squares to play");
-                    activePlayer = 0;
-                }
-            }
-        } else {
+            win = 2;
+            activePlayer = 0;
 
-            if (win == 2) {
-                if (gameState[tapped] == 2) {
-                    img.setImageResource(R.drawable.swoledoge);
-                    gameState[tapped] = activePlayer;
-                    flag = 1;
-                }
-            }
+            TextView sB = findViewById(R.id.status);
+            sB.setText("Hello, welcome to the game - Doge' s Turn is always first");
 
-            winCheck();
-            if (win != 2) {
-                switch (win) {
-                    case 0:
-                        statusBar.setText("Doge Wins");
-                        Button restartBtn = findViewById(R.id.restartButton);
-                        restartBtn.setVisibility(View.VISIBLE);
-                        break;
-                    case 1:
-                        statusBar.setText("Cheems Wins");
-                        Button rB1 = findViewById(R.id.restartButton);
-                        rB1.setVisibility(View.VISIBLE);
-                        break;
-                    case 3:
-                        statusBar.setText("Draw !");
-                        Button rB2 = findViewById(R.id.restartButton);
-                        rB2.setVisibility(View.VISIBLE);
-                        break;
-                }
-            }
-
-            else {
-                if (flag != 1){
-                    Toast.makeText(this, "Tap on a Valid Square", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    statusBar.setText("Cheems' Turn - Tap on the empty squares to play");
-                    activePlayer = 1;
-                }
-            }
+            Toast.makeText(this, "Error: " + exception, Toast.LENGTH_SHORT).show();
         }
 
         //img.animate().translationY(1000f).setDuration(300);
