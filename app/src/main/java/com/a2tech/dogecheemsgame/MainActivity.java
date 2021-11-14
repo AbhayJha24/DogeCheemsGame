@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
      2 - Null
     */
 
+    int flag = 0;
+
     int win = 2;
 
     int[] gameState = {2, 2, 2, 2, 2, 2, 2, 2, 2};
@@ -104,12 +106,15 @@ public class MainActivity extends AppCompatActivity {
 
         //img.setTranslationY(-1000f);
 
+        flag = 0;
+
         if (activePlayer == 1) {
 
             if (win == 2) {
                 if (gameState[tapped] == 2) {
                     img.setImageResource(R.drawable.cheems);
                     gameState[tapped] = activePlayer;
+                    flag = 1;
                 }
             }
 
@@ -135,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             else {
-                if (gameState[tapped] != activePlayer){
+                if (flag != 1){
                     Toast.makeText(this, "Tap on a Valid Square", Toast.LENGTH_SHORT).show();
                 }
                 else {
@@ -149,6 +154,7 @@ public class MainActivity extends AppCompatActivity {
                 if (gameState[tapped] == 2) {
                     img.setImageResource(R.drawable.swoledoge);
                     gameState[tapped] = activePlayer;
+                    flag = 1;
                 }
             }
 
@@ -174,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             else {
-                if (gameState[tapped] != activePlayer){
+                if (flag != 1){
                     Toast.makeText(this, "Tap on a Valid Square", Toast.LENGTH_SHORT).show();
                 }
                 else {
