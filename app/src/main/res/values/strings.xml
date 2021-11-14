@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Doge Cheems Game</string>
+    <string name="Heading">Doge Cheems Game</string>
+    <string name="Grid">Play Area</string>
+    <string name="restartButton">Play again</string>
+    <string name="statusBar">Status</string>
+</resources>
